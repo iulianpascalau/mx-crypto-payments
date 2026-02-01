@@ -11,15 +11,15 @@ import (
 )
 
 const (
-	contractCreditsVersionTag = "v1.0.0"
-	contractCreditsURL        = "https://github.com/iulianpascalau/credits-contract-rs/releases/download/" + contractCreditsVersionTag + "/credits-contract.zip"
+	ContractCreditsVersionTag = "v1.0.0"
+	ContractCreditsURL        = "https://github.com/iulianpascalau/credits-contract-rs/releases/download/" + ContractCreditsVersionTag + "/credits-contract.zip"
 )
 
 func init() {
 	if !IsChainSimulatorIsRunning() {
 		return
 	}
-	err := ensureContractCredits()
+	err := EnsureContractCredits(ContractCreditsURL)
 	if err != nil {
 		fmt.Printf("WARNING: Failed to ensure credits contract: %v\n", err)
 		// We deliberately panic here because if we can't get the contract, tests will fail anyway
@@ -27,7 +27,8 @@ func init() {
 	}
 }
 
-func ensureContractCredits() error {
+// EnsureContractCredits will fetch the provided contract release artifact and unzip it
+func EnsureContractCredits(contractURL string) error {
 	root := traverse("integrationTests")
 	extractTarget := filepath.Join(root, "contracts")
 	contractDir := filepath.Join(extractTarget, "credits")
@@ -38,8 +39,8 @@ func ensureContractCredits() error {
 		return nil
 	}
 
-	fmt.Printf("Downloading credits contract from %s...\n", contractCreditsURL)
-	resp, err := http.Get(contractCreditsURL)
+	fmt.Printf("Downloading credits contract from %s...\n", contractURL)
+	resp, err := http.Get(contractURL)
 	if err != nil {
 		return fmt.Errorf("failed to download contract: %w", err)
 	}
