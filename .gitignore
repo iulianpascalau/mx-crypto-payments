@@ -24,9 +24,14 @@ profile.cov
 go.work
 go.work.sum
 
-# env file
+# env file & configs & keys
 .env
+config.toml
+*.pem
 
-# Editor/IDE
-# .idea/
-# .vscode/
+# binary and other output directories
+data/
+logs/
+.idea/
+contracts/
+crypto-payments-server
