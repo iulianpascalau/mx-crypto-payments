@@ -112,6 +112,6 @@ func EnsureContractCredits(contractURL string, targetDir string) error {
 		}
 	}
 
-	log.Info(fmt.Sprintf("Successfully downloaded and extracted credits contract."))
+	log.Info("Successfully downloaded and extracted credits contract.")
 	return nil
 }
